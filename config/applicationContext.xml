@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+    <bean id="contextApplicationContextProvider" class="com.eurotunnel.sciforma.context.ApplicationContextProvider"></bean>
+
+    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+       <property name="targetMethod" value="initLogging" />
+       <property name="arguments">
+          <list>
+             <value>config/log4j.xml</value>
+          </list>
+       </property>
+    </bean>
+   
+    <bean id="sciforma" class="com.eurotunnel.sciforma.beans.Connector">
+        <property name="IP" value="https://eurotunnel-recette.sciforma-online.com"/>
+        <property name="PORT" value="8080"/>
+        <property name="CONTEXTE" value="sciforma"/>
+        <property name="USER" value="psnextadmin"/>
+        <property name="PWD" value="5UmmUBbrHBrb"/>
+        <property name="DRIVER" value=""/>
+    </bean>
+	
+	<!--bean id="sciforma" class="com.eurotunnel.sciforma.beans.Connector">
+        <property name="IP" value="https://eurotunnel-recette2.sciforma-online.com"/>
+        <property name="PORT" value="8080"/>
+        <property name="CONTEXTE" value="sciforma"/>
+        <property name="USER" value="psconnect"/>
+        <property name="PWD" value="sciforma123456"/>
+        <property name="DRIVER" value=""/>
+    </bean-->
+	
+	
+	<bean id="vdd_projet_budget" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Budgets projets"/>
+    </bean>
+	<bean id="vdd_projet_budget_type" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Type"/>
+    </bean>
+	<bean id="vdd_projet_budget_code" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Code budgétaire"/>
+    </bean>
+	<bean id="vdd_projet_budget_realise_actual" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Réalisé (Actual)"/>
+    </bean>
+	<bean id="vdd_projet_budget_engage_commande" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Engagé (Commandé)"/>
+    </bean>
+	<bean id="vdd_projet_budget_description" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Description"/>
+    </bean>
+	<bean id="vdd_projet_budget_budget" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Budget"/>
+    </bean>
+	<bean id="vdd_projet_budget_engage_distr" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Engagé distr"/>
+    </bean>
+	<bean id="vdd_projet_budget_prévisionnels" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Prévisionnels"/>
+    </bean>
+	<bean id="vdd_projet_budget_realise_actuals" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Réalisé (Actuals)"/>
+    </bean>
+	<bean id="vdd_projet_budget_workorder" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Sortie Work-order"/>
+    </bean>
+	<bean id="vdd_projet_budget_id" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="_Unique_IID"/>
+    </bean>
+	
+	<bean id="vdd_projet_budget_header" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Budgets projets Header"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_type" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Type"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_code" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Code_budgétaire"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_id_budget" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_budget"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_engage_commande" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Engagé_Commandé"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_description" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Description"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_budget" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Budget"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_prévisionnels" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Prévisionnels"/>
+    </bean>
+	<bean id="vdd_projet_budget_header_realise_actuals" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Réalisé_Actuals"/>
+    </bean>
+	
+	<bean id="vdd_projet_budget_line" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Budgets projets Line"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_project_name" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="project_name"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_version" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="version"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_id_budget" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_budget"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_field" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="field"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_month" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="month"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_year" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="year"/>
+    </bean>
+	<bean id="vdd_projet_budget_line_cost_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="cost_value"/>
+    </bean>
+	
+	<bean id="vdd_projet_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Prévisionnel"/>
+    </bean>
+	<bean id="vdd_projet_previ_type" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Type de budget"/>
+    </bean>
+	<bean id="vdd_projet_previ_code" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Code budgétaire"/>
+    </bean>
+	<bean id="vdd_projet_previ_id_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="_Unique_IID"/>
+    </bean>
+	<bean id="vdd_projet_previ_phase" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Phase"/>
+    </bean>
+	<bean id="vdd_projet_previ_nature" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Nature"/>
+    </bean>
+	<bean id="vdd_projet_previ_fin_de_la_phase" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Fin de la phase"/>
+    </bean>
+	<bean id="vdd_projet_previ_desi" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Désignation"/>
+    </bean>
+	<bean id="vdd_projet_previ_debut" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Début de la phase"/>
+    </bean>
+	<bean id="vdd_projet_previ_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Prévisionnel"/>
+    </bean>
+	<bean id="vdd_projet_previ_previ_total" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Prévisionnel total"/>
+    </bean>
+	
+	<bean id="vdd_projet_previ_header" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Previ_Header"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_type" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Type_de_budget"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_code" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Code_budgétaire"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_id_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_previsionnel"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_phase" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Phase"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_nature" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Nature"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_fin_de_la_phase" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Fin_de_la_phase"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_desi" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Désignation"/>
+    </bean>
+	<bean id="vdd_projet_previ_header_debut" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Début_de_la_phase"/>
+    </bean>
+	
+	<bean id="vdd_projet_previ_line" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Previ_Line"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_project_name" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="project_name"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_version" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="version"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_id_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_previsionnel"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_field" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="field"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_month" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="month"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_year" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="year"/>
+    </bean>
+	<bean id="vdd_projet_previ_line_cost_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="cost_value"/>
+    </bean>
+
+	<bean id="vdd_labor_ass_line" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_QV_Ass_line"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_duration_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="duration_value"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_effort_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="effort_value"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_cost_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="cost_value"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_field" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="field"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_month" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="month"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_project_iid" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="project_name"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_record_id" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="name"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_task_iid" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="task_name"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_version_iid" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="version"/>
+    </bean>
+	<bean id="vdd_labor_ass_line_year" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="year"/>
+    </bean>
+	
+	<bean id="vdd_resource_header" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Resource_Header"/>
+    </bean>
+	<bean id="vdd_resource_header_id_resource" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_resource"/>
+    </bean>
+	<bean id="vdd_resource_header_num" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Num"/>
+    </bean>
+	<bean id="vdd_resource_header_orga" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="directOrganization"/>
+    </bean>
+	<bean id="vdd_resource_header_skill" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="directSkill"/>
+    </bean>
+	<bean id="vdd_resource_header_job" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="directJobClassific"/>
+    </bean>
+	<bean id="vdd_resource_header_email1" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="EmailAddress1"/>
+    </bean>
+	<bean id="vdd_resource_header_email2" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="EmailAddress2"/>
+    </bean>
+	<bean id="vdd_resource_header_email3" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="EmailAddress3"/>
+    </bean>
+	<bean id="vdd_resource_header_firstname" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="FirstName"/>
+    </bean>
+	<bean id="vdd_resource_header_middlename" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="MiddleName"/>
+    </bean>
+	<bean id="vdd_resource_header_lastname" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="LastName"/>
+    </bean>
+	<bean id="vdd_resource_header_id" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ResourceID"/>
+    </bean>
+	<bean id="vdd_resource_header_name" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Name"/>
+    </bean>
+	
+	<bean id="vdd_resource_line" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Resource_Line"/>
+    </bean>
+	<bean id="vdd_resource_line_resource_name" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="resource_name"/>
+    </bean>
+	<bean id="vdd_resource_line_version" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="version"/>
+    </bean>
+	<bean id="vdd_resource_line_id_resource" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_resource"/>
+    </bean>
+	<bean id="vdd_resource_line_field" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="field"/>
+    </bean>
+	<bean id="vdd_resource_line_month" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="month"/>
+    </bean>
+	<bean id="vdd_resource_line_year" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="year"/>
+    </bean>
+	<bean id="vdd_resource_effort_cost_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="effort_value"/>
+    </bean>
+	<bean id="vdd_resource_string_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="string_value"/>
+    </bean>
+	
+	<bean id="vdd_projet_qv_line" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Project_Line"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_project_name" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="project_name"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_version" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="version"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_id_qv" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="id_prj"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_field" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="field"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_month" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="month"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_year" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="year"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_cost_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="cost_value"/>
+    </bean>
+	<bean id="vdd_projet_qv_line_decimal_value" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="decimal_value"/>
+    </bean>
+	
+	<bean id="project_challenge" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Challenge budget"/>
+    </bean>
+	<bean id="project_et_challenge_previ" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Prévisionnel challengé (€)"/>
+    </bean>
+	
+	<bean id="vdd_ressource_distr" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="FS_Ressource_Distr"/>
+    </bean>
+	<bean id="vdd_ressource_distr_allo" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="% Allocated"/>
+    </bean>
+	<bean id="vdd_ressource_distr_actual_effort" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Actual Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_actual_effort_adj" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Actual Effort Adjustment"/>
+    </bean>
+	<bean id="vdd_ressource_distr_av_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Available Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_pend_av_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Pending Available Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_rem_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Remaining Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_rpt_tot_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Rpt Total Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_sub_com_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Submitted Commitment Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_sub_com_rate" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Submitted Commitment Rate"/>
+    </bean>
+	<bean id="vdd_ressource_distr_ts_ac_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Timesheet Actual Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_ts_com" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Time Tracking Completion"/>
+    </bean>
+	<bean id="vdd_ressource_distr_tot_com_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Total Commitment Effort"/>
+    </bean>
+	<bean id="vdd_ressource_distr_tot_com_rate" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Total Commitment Rate"/>
+    </bean>
+	<bean id="vdd_ressource_distr_tot_eff" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Total Effort"/>
+    </bean>
+	
+	<bean id="date_year_min" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="-1"/>
+    </bean>
+	<bean id="date_year_max" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="2"/>
+    </bean>
+	
+	<bean id="vdd_et_qv_timesheet" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_QV_TIMESHEET"/>
+    </bean>
+	<bean id="number_of_days_before" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="-10"/>
+    </bean>
+	<bean id="number_of_months_before" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="0"/>
+    </bean>
+	<bean id="number_of_years_before" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="0"/>
+    </bean>
+	
+	<bean id="VDD_ET_QV_FDL" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_QV_FDL"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_MONTANT" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Montant"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_MTT_BUDGET" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="MttTotalBudj"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_MTT_FDL" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="MttTotalFDL"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_MTT_PREVI" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="MttTotalPrevi"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_N" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="N_FDL"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_PRESENTE_LE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="PresenteeLe"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_TITRE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Titre"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_VALIDE_LE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ValideeLe"/>
+    </bean>
+	<bean id="PROJECT_MTT_FDL" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Montant total des FDL"/>
+    </bean>
+	<bean id="PROJECT_MTT_BUDGET" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Budget Projet"/>
+    </bean>
+	<bean id="PROJECT_MTT_PREVI" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Prévisionnel (€)"/>
+    </bean>
+	<bean id="VDD_ET_QV_FDL_PROJECTNAME" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ProjectName"/>
+    </bean>
+	
+	<bean id="VDD_PROJET_FDL" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="ET_Fiches de lancement"/>
+    </bean>
+	<bean id="VDD_PROJET_FDL_MONTANT" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Montant"/>
+    </bean>
+	<bean id="VDD_PROJET_FDL_N" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="N° FDL"/>
+    </bean>
+	<bean id="VDD_PROJET_FDL_PRESENTE_LE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Présentée le"/>
+    </bean>
+	<bean id="VDD_PROJET_FDL_TITRE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Titre"/>
+    </bean>
+	<bean id="VDD_PROJET_FDL_VALIDE_LE" class="com.eurotunnel.sciforma.beans.SciformaField" >
+        <property name="sciformaField" value="Validée le"/>
+    </bean>
+	
+	
+</beans>
